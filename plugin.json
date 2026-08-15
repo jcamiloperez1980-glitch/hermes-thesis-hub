@@ -1,0 +1,27 @@
+{
+  "name": "hermes-thesis-hub",
+  "version": "1.0.0",
+  "description": "🎓 Ecosistema completo de investigación para tu tesis doctoral: skills, herramientas, plantillas y más.",
+  "author": {
+    "name": "sapamole18"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/sapamole18/hermes-thesis-hub",
+  "keywords": [
+    "hermes",
+    "thesis",
+    "academic",
+    "research",
+    "ponytail",
+    "typst",
+    "apa",
+    "obsidian",
+    "zotero"
+  ],
+  "skills": [
+    "skills"
+  ],
+  "hooks": [
+    "hooks/thesis-hub.js"
+  ]
+}
