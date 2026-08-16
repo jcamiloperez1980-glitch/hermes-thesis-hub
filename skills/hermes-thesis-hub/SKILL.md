@@ -2,7 +2,7 @@
 name: hermes-thesis-hub
 description: 🎓 Ecosistema completo de investigación para tesis doctoral. Skills: Ponytail, Humanizer, Find-Skills, PowerPoint, OpenAlex. Tools: Typst, Himalaya, python-pptx. Incluye vault Obsidian y plantillas APA.
 version: 1.0.0
-author: sapamole18
+author: Research AI Lab
 license: MIT
 platforms: [windows, macos, linux]
 ---

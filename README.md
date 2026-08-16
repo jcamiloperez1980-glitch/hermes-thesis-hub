@@ -16,6 +16,13 @@
 | 📊 **PowerPoint-PPT** | Genera presentaciones profesionales con python-pptx |
 | 📚 **OpenAlex** | Busca 250M+ artículos académicos reales con DOI |
 
+### 🖥️ Aplicaciones
+
+| Aplicación | Para qué |
+|------------|----------|
+| **Obsidian** | Notas, análisis y grafo de tu literatura |
+| **Zotero** | Gestión de referencias bibliográficas |
+
 ### 🛠️ Herramientas
 
 | Herramienta | Para qué |
@@ -39,11 +46,17 @@
 
 ```bash
 # 1. Clona o descarga el paquete
-git clone https://github.com/sapamole18/hermes-thesis-hub.git
+git clone https://github.com/jcamiloperez1980-glitch/hermes-thesis-hub.git
 cd hermes-thesis-hub
 
-# 2. Ejecuta el instalador
+# 2. Ejecuta el instalador (pide la API key de OpenRouter en pantalla)
 bash install.sh
+```
+
+También puedes pasar la API key directo, sin prompt:
+
+```bash
+OPENROUTER_API_KEY=sk-or-... bash install.sh
 ```
 
 O si prefieres instalarlo como plugin de Hermes:
@@ -103,7 +116,7 @@ Investigación  →  Organización  →  Análisis  →  Escritura  →  Present
 1. **Abre Obsidian** y abre el vault en `~/Documents/Hermes Thesis Hub/`
 2. **Configura tu correo** con Himalaya (di "configura mi correo" en Hermes)
 3. **Conecta Zotero** para gestionar tus referencias
-4. **Prueba Tipst** generando un documento de prueba con APA 7
+4. **Prueba Typst** generando un documento de prueba con APA 7
 
 ---
 
