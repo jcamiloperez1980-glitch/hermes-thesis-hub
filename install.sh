@@ -113,19 +113,42 @@ echo -e "\n${BOLD}${CYAN}[5/10]${NC} Instalando Typst (composición tipográfica
 if command -v typst &>/dev/null; then
     echo -e "  ${GREEN}✓${NC} Typst $(typst --version) detectado"
 else
+    TYPST_INSTALLED=false
     if command -v winget &>/dev/null; then
-        winget install Typst.Typst 2>/dev/null && echo -e "  ${GREEN}✓${NC} Typst instalado via winget"
-    else
-        echo -e "  ${YELLOW}⚠${NC} Instala Typst manualmente desde: https://github.com/typst/typst/releases"
+        winget install Typst.Typst 2>/dev/null && TYPST_INSTALLED=true
     fi
-fi
-
-# Añadir Typst al PATH si es Windows
-if [ -f "$HOME/AppData/Local/Microsoft/WinGet/Packages/Typst.Typst_Microsoft.Winget.Source_8wekyb3d8bbwe/typst-x86_64-pc-windows-msvc/typst.exe" ]; then
-    TYPST_PATH=$(dirname "$(find "$HOME/AppData/Local/Microsoft/WinGet/Packages" -name "typst.exe" 2>/dev/null | head -1)")
-    if ! echo "$PATH" | grep -q "$TYPST_PATH"; then
-        echo 'export PATH="$PATH:'"$TYPST_PATH"'"' >> "$HOME/.bashrc"
-        echo -e "  ${GREEN}✓${NC} Typst añadido al PATH (~/.bashrc)"
+    if [ "$TYPST_INSTALLED" = false ]; then
+        TYPST_DIR="$HOME/typst"
+        TYPST_ZIP="$HOME/typst-download.zip"
+        echo -e "  ${YELLOW}→${NC} Descargando Typst desde GitHub..."
+        curl -sLo "$TYPST_ZIP" "https://github.com/typst/typst/releases/latest/download/typst-x86_64-pc-windows-msvc.zip"
+        if [ -f "$TYPST_ZIP" ] && [ -s "$TYPST_ZIP" ]; then
+            mkdir -p "$TYPST_DIR"
+            python -c "import zipfile,sys; zipfile.ZipFile(sys.argv[1]).extractall(sys.argv[2])" "$(cygpath -w "$TYPST_ZIP")" "$(cygpath -w "$TYPST_DIR")" 2>/dev/null
+            rm -f "$TYPST_ZIP"
+            TYPST_EXE=$(find "$TYPST_DIR" -name "typst.exe" 2>/dev/null | head -1)
+            if [ -n "$TYPST_EXE" ]; then
+                TYPST_BIN=$(dirname "$TYPST_EXE")
+                echo 'export PATH="$PATH:'"$TYPST_BIN"'"' >> "$HOME/.bashrc"
+                export PATH="$PATH:$TYPST_BIN"
+                echo -e "  ${GREEN}✓${NC} Typst instalado en $TYPST_DIR"
+            else
+                echo -e "  ${RED}✗${NC} Error extrayendo Typst — descárgalo de https://github.com/typst/typst/releases"
+            fi
+        else
+            echo -e "  ${RED}✗${NC} Error descargando Typst — descárgalo de https://github.com/typst/typst/releases"
+        fi
+    else
+        echo -e "  ${GREEN}✓${NC} Typst instalado via winget"
+        # Añadir al PATH si fue instalado por winget
+        TYPST_EXE=$(find "$HOME/AppData/Local/Microsoft/WinGet/Packages" -name "typst.exe" 2>/dev/null | head -1)
+        if [ -n "$TYPST_EXE" ]; then
+            TYPST_BIN=$(dirname "$TYPST_EXE")
+            if ! echo "$PATH" | grep -q "$TYPST_BIN"; then
+                echo 'export PATH="$PATH:'"$TYPST_BIN"'"' >> "$HOME/.bashrc"
+                echo -e "  ${GREEN}✓${NC} Typst añadido al PATH (~/.bashrc)"
+            fi
+        fi
     fi
 fi
 
@@ -141,8 +164,10 @@ else
     HIMALAYA_DIR="$HOME/himalaya"
     if [ ! -f "$HIMALAYA_DIR/himalaya.exe" ]; then
         mkdir -p "$HIMALAYA_DIR"
-        curl -sLo "/tmp/himalaya.zip" "https://github.com/pimalaya/himalaya/releases/download/v2.0.0/himalaya.x86_64-windows.zip"
-        python -c "import zipfile; zipfile.ZipFile('/tmp/himalaya.zip').extractall('$HIMALAYA_DIR')" 2>/dev/null
+        HIMALAYA_ZIP="$HOME/himalaya-download.zip"
+        curl -sLo "$HIMALAYA_ZIP" "https://github.com/pimalaya/himalaya/releases/download/v2.0.0/himalaya.x86_64-windows.zip"
+        python -c "import zipfile,sys; zipfile.ZipFile(sys.argv[1]).extractall(sys.argv[2])" "$(cygpath -w "$HIMALAYA_ZIP")" "$(cygpath -w "$HIMALAYA_DIR")" 2>/dev/null
+        rm -f "$HIMALAYA_ZIP"
         echo 'export PATH="$PATH:'"$HIMALAYA_DIR"'"' >> "$HOME/.bashrc"
         echo -e "  ${GREEN}✓${NC} Himalaya instalado en $HIMALAYA_DIR"
     else
@@ -152,24 +177,64 @@ fi
 
 # ── 8. Instalar Obsidian y Zotero ──
 echo -e "\n${BOLD}${CYAN}[8/10]${NC} Instalando Obsidian y Zotero..."
-if command -v winget &>/dev/null; then
-    if winget list --id Obsidian.Obsidian 2>/dev/null | grep -q Obsidian; then
-        echo -e "  ${GREEN}✓${NC} Obsidian ya instalado"
-    else
+
+# -- Obsidian --
+OBSIDIAN_FOUND=false
+if command -v winget &>/dev/null && winget list --id Obsidian.Obsidian 2>/dev/null | grep -q Obsidian; then
+    OBSIDIAN_FOUND=true
+    echo -e "  ${GREEN}✓${NC} Obsidian ya instalado"
+elif [ -f "$HOME/AppData/Local/Obsidian/Obsidian.exe" ]; then
+    OBSIDIAN_FOUND=true
+    echo -e "  ${GREEN}✓${NC} Obsidian ya instalado"
+fi
+
+if [ "$OBSIDIAN_FOUND" = false ]; then
+    if command -v winget &>/dev/null; then
         winget install --id Obsidian.Obsidian --accept-package-agreements --accept-source-agreements 2>/dev/null \
-            && echo -e "  ${GREEN}✓${NC} Obsidian instalado" \
-            || echo -e "  ${RED}✗${NC} Error instalando Obsidian — descárgalo de https://obsidian.md"
+            && echo -e "  ${GREEN}✓${NC} Obsidian instalado" && OBSIDIAN_FOUND=true
     fi
-    if winget list --id DigitalScholar.Zotero 2>/dev/null | grep -q Zotero; then
-        echo -e "  ${GREEN}✓${NC} Zotero ya instalado"
-    else
+    if [ "$OBSIDIAN_FOUND" = false ]; then
+        OBSIDIAN_EXE="$HOME/obsidian-installer.exe"
+        echo -e "  ${YELLOW}→${NC} Descargando Obsidian..."
+        OBSIDIAN_URL=$(curl -s "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest" \
+            | python -c "import json,sys;[print(a['browser_download_url']) for a in json.load(sys.stdin).get('assets',[]) if a['name'].endswith('.exe') and 'arm' not in a['name'].lower()]" 2>/dev/null | head -1)
+        OBSIDIAN_URL="${OBSIDIAN_URL:-https://obsidian.md/download}"
+        curl -sLo "$OBSIDIAN_EXE" "$OBSIDIAN_URL"
+        if [ -f "$OBSIDIAN_EXE" ] && [ -s "$OBSIDIAN_EXE" ]; then
+            echo -e "  ${GREEN}✓${NC} Instalador descargado: $OBSIDIAN_EXE"
+            echo -e "  ${YELLOW}ℹ${NC} Ejecuta el instalador para completar: $(cygpath -w "$OBSIDIAN_EXE")"
+        else
+            echo -e "  ${RED}✗${NC} Error descargando Obsidian — descárgalo de https://obsidian.md"
+        fi
+    fi
+fi
+
+# -- Zotero --
+ZOTERO_FOUND=false
+if command -v winget &>/dev/null && winget list --id DigitalScholar.Zotero 2>/dev/null | grep -q Zotero; then
+    ZOTERO_FOUND=true
+    echo -e "  ${GREEN}✓${NC} Zotero ya instalado"
+elif [ -f "$HOME/AppData/Local/Zotero/zotero.exe" ] || [ -f "/c/Program Files/Zotero/zotero.exe" ] || [ -f "/c/Program Files (x86)/Zotero/zotero.exe" ]; then
+    ZOTERO_FOUND=true
+    echo -e "  ${GREEN}✓${NC} Zotero ya instalado"
+fi
+
+if [ "$ZOTERO_FOUND" = false ]; then
+    if command -v winget &>/dev/null; then
         winget install --id DigitalScholar.Zotero --accept-package-agreements --accept-source-agreements 2>/dev/null \
-            && echo -e "  ${GREEN}✓${NC} Zotero instalado" \
-            || echo -e "  ${RED}✗${NC} Error instalando Zotero — descárgalo de https://www.zotero.org"
+            && echo -e "  ${GREEN}✓${NC} Zotero instalado" && ZOTERO_FOUND=true
     fi
-else
-    echo -e "  ${YELLOW}⚠${NC} winget no disponible. Instala manualmente:"
-    echo -e "     Obsidian: https://obsidian.md  |  Zotero: https://www.zotero.org"
+    if [ "$ZOTERO_FOUND" = false ]; then
+        ZOTERO_EXE="$HOME/zotero-installer.exe"
+        echo -e "  ${YELLOW}→${NC} Descargando Zotero..."
+        curl -sLo "$ZOTERO_EXE" "https://www.zotero.org/download/client/dl?channel=release&platform=win-x64"
+        if [ -f "$ZOTERO_EXE" ] && [ -s "$ZOTERO_EXE" ]; then
+            echo -e "  ${GREEN}✓${NC} Instalador descargado: $ZOTERO_EXE"
+            echo -e "  ${YELLOW}ℹ${NC} Ejecuta el instalador para completar: $(cygpath -w "$ZOTERO_EXE")"
+        else
+            echo -e "  ${RED}✗${NC} Error descargando Zotero — descárgalo de https://www.zotero.org"
+        fi
+    fi
 fi
 
 # ── 9. Crear vault de Obsidian ──
