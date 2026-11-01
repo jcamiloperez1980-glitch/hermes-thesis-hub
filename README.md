@@ -1,148 +1,76 @@
-# 🎓 Hermes Thesis Hub
+# 🎓 Kit de tesis doctoral
 
-**Tu ecosistema completo de investigación para la tesis doctoral.**
+**Un sistema completo para llevar tu tesis de la primera búsqueda bibliográfica a la defensa, sin perder fuentes, notas ni semanas peleando con el formato.**
 
----
-
-## 📦 ¿Qué incluye?
-
-### 🤖 Skills para Hermes Agent
-
-| Skill | Función |
-|-------|---------|
-| 🐴 **Ponytail** | Modo lazy senior dev — código mínimo y eficiente |
-| ✍️ **Humanizer** | Texto natural, elimina marcas de escritura AI |
-| 🔍 **Find-Skills** | Descubre e instala skills del ecosistema abierto |
-| 📊 **PowerPoint-PPT** | Genera presentaciones profesionales con python-pptx |
-| 📚 **OpenAlex** | Busca 250M+ artículos académicos reales con DOI |
-
-### 🖥️ Aplicaciones
-
-| Aplicación | Para qué |
-|------------|----------|
-| **Obsidian** | Notas, análisis y grafo de tu literatura |
-| **Zotero** | Gestión de referencias bibliográficas |
-
-### 🛠️ Herramientas
-
-| Herramienta | Para qué |
-|-------------|----------|
-| **Typst** | Composición tipográfica moderna — como LaTeX, más simple |
-| **Himalaya** | Cliente de correo desde terminal (IMAP/SMTP) |
-| **python-pptx** | Biblioteca Python para generar PowerPoints |
-
-### 📁 Recursos
-
-| Recurso | Ubicación |
-|---------|-----------|
-| 🖥️ **Presentación bienvenida** | `assets/skills-hermes-tesis.pptx` |
-| 📝 **Vault Obsidian** | Se crea en `~/Documents/Hermes Thesis Hub/` |
-| 🦀 **Plantilla Typst APA** | `typst/plantilla-tesis.typ` |
-| 📚 **Notas template Obsidian** | `obsidian/` |
+Hecho para doctorandos y maestrandos de Latinoamérica, por Research AI Lab, a partir de años de asesorar tesis.
 
 ---
 
-## ⚡ Instalación Rápida
+## Qué resuelve
 
-```bash
-# 1. Clona o descarga el paquete
-git clone https://github.com/jcamiloperez1980-glitch/hermes-thesis-hub.git
-cd hermes-thesis-hub
+- Tienes PDFs en cinco carpetas distintas y no recuerdas cuál decía qué.
+- Lees mucho pero, cuando te sientas a escribir, no encuentras la idea que subrayaste hace dos meses.
+- Pierdes días ajustando las normas APA a mano.
+- Tu director(a) te pregunta "¿qué avanzaste?" y no tienes un registro claro.
 
-# 2. Ejecuta el instalador (pide la API key de OpenRouter en pantalla)
-bash install.sh
-```
+El kit te da **un flujo de trabajo probado** con herramientas gratuitas, plantillas listas y, si quieres, un asistente IA que te acompaña en cada paso.
 
-También puedes pasar la API key directo, sin prompt:
+## El flujo, paso a paso
 
-```bash
-OPENROUTER_API_KEY=sk-or-... bash install.sh
-```
+| Paso | Qué haces | Herramienta | Guía |
+|---|---|---|---|
+| **1. Buscar literatura** | Plan de búsqueda y búsquedas sistemáticas con DOI verificable | OpenAlex, Redalyc, SciELO | [1-buscar-literatura](1-buscar-literatura/) |
+| **2. Leer y anotar** | Guardar cada fuente con un clic, subrayar con un código de colores | Zotero | [2-leer-y-anotar](2-leer-y-anotar/) |
+| **3. Organizar** | Fichas de lectura, conceptos y matriz de literatura, todo enlazado | Obsidian | [3-organizar-obsidian](3-organizar-obsidian/) |
+| **4. Escribir** | Tesis con APA 7 automático: portada, índice, tablas y referencias | Typst | [4-escribir](4-escribir/) |
+| **5. Presentar** | Plantilla de defensa y preparación para el tribunal | PowerPoint / Keynote / Google Slides | [5-presentar](5-presentar/) |
 
-O si prefieres instalarlo como plugin de Hermes:
+## Qué incluye
 
-```bash
-hermes plugins install ./hermes-thesis-hub --enable
-hermes gateway restart
-```
+- **Instalador** para Windows y Mac: doble clic y listo.
+- **Vault de Obsidian** con carpetas para cada etapa y 6 plantillas: resumen de paper, concepto, nota diaria, reunión de asesoría, matriz de literatura y plan de búsqueda.
+- **Plantilla de tesis en Typst** con formato APA 7: portada, resumen, índice, capítulos y referencias automáticas desde Zotero.
+- **Plantilla de defensa** (13 diapositivas) con notas del orador sobre qué decir y cuánto tiempo dedicar.
+- **Guías paso a paso** para cada etapa, pensadas para quien no es experto en tecnología.
+- **Guía de uso ético de IA** para no poner en riesgo tu tesis.
+- **Vault de demostración** con una tesis ficticia ya en marcha, para que veas cómo se usa.
+- **Asistente IA (opcional):** Hermes Agent con skills para buscar en OpenAlex, revisar estilo y crear presentaciones.
 
----
+## Empieza aquí
 
-## 🚀 Cómo usar cada skill
+1. **Instala el kit:**
+   - Windows → [instalacion/INSTALAR-WINDOWS.md](instalacion/INSTALAR-WINDOWS.md)
+   - Mac → [instalacion/INSTALAR-MAC.md](instalacion/INSTALAR-MAC.md)
+2. **Sigue la [Guía rápida](GUIA-RAPIDA.md):** tus primeros 30 minutos con el kit.
+3. **Mira la [demo](demo/)** para ver un vault de tesis en uso.
 
-### 🐴 Ponytail
-Solo habla normal. El skill se activa automáticamente.
-- `/ponytail [lite | full | ultra | off]` — ajusta el nivel
-- `/ponytail-review` — revisa tu código por sobreingeniería
+## ¿Necesito el asistente IA?
 
-### ✍️ Humanizer
-Pega tu texto y pide que lo revise:
-- "Humaniza este texto: [texto]"
-- "Revisa si esto suena a AI"
+No. Todo el flujo funciona con Obsidian, Zotero y Typst, que son gratuitos. El asistente IA ahorra tiempo en búsquedas y tareas repetitivas, pero requiere una API key de OpenRouter con costo por uso (lo pagas tú directamente a OpenRouter según lo que uses).
 
-### 🔍 Find-Skills
-- "Encuentra un skill para hacer [algo]"
-- `npx skills find [tema]`
+## Requisitos
 
-### 📊 PowerPoint-PPT
-- "Crea una presentación sobre [tema]"
-- "Agrega una diapositiva con gráfico de barras"
-- "Cambia el diseño a tonos azules"
+- Windows 10/11 o macOS reciente.
+- Conexión a internet para instalar.
+- Para el asistente IA: una cuenta en [OpenRouter](https://openrouter.ai) con saldo.
 
-### 📚 OpenAlex
-- "Busca papers sobre [tema] en OpenAlex"
-- "Encuentra artículos recientes con muchas citas sobre [tema]"
-- "Dame los 10 papers más relevantes sobre [tema] con DOI"
-
----
-
-## 🔄 Flujo de trabajo recomendado
+## Estructura de esta carpeta
 
 ```
-Investigación  →  Organización  →  Análisis  →  Escritura  →  Presentación
-(OpenAlex)       (Zotero)         (Obsidian)    (Typst)       (PowerPoint)
+📁 Kit de tesis doctoral
+├── README.md                ← estás aquí
+├── GUIA-RAPIDA.md           ← tus primeros 30 minutos
+├── 📁 instalacion/          ← instaladores y guías de Windows y Mac
+├── 📁 1-buscar-literatura/
+├── 📁 2-leer-y-anotar/
+├── 📁 3-organizar-obsidian/ ← incluye vault-plantilla/
+├── 📁 4-escribir/           ← plantilla Typst + guía de uso ético de IA
+├── 📁 5-presentar/          ← plantilla de defensa
+├── 📁 demo/                 ← vault de ejemplo (contenido ficticio)
+├── install.sh               ← instalador para Mac y Linux
+└── 📁 skills/ hooks/        ← componentes del asistente IA (no necesitas tocarlos)
 ```
 
-1. **Investigar**: Pídele a Hermes que busque papers con OpenAlex
-2. **Organizar**: Guarda las referencias en Zotero
-3. **Analizar**: Toma notas en Obsidian
-4. **Escribir**: Compila tu tesis en Typst con APA 7
-5. **Presentar**: Genera tu defensa con PowerPoint
+## Desinstalar
 
----
-
-## 📋 Próximos pasos después de instalar
-
-1. **Abre Obsidian** y abre el vault en `~/Documents/Hermes Thesis Hub/`
-2. **Configura tu correo** con Himalaya (di "configura mi correo" en Hermes)
-3. **Conecta Zotero** para gestionar tus referencias
-4. **Prueba Typst** generando un documento de prueba con APA 7
-
----
-
-## 🗑️ Desinstalación
-
-```bash
-# Remover skills
-npx skills remove ponytail
-npx skills remove humanizer
-npx skills remove openalex
-npx skills remove find-skills
-
-# Remover plugins Hermes
-hermes plugins disable ponytail
-hermes plugins remove ponytail
-
-# Remover herramientas
-pip uninstall python-pptx -y
-```
-
----
-
-## 📄 Licencia
-
-MIT — haz con esto lo que quieras.
-
----
-
-<p align="center">🎓 <strong>¡A investigar!</strong> 🎓</p>
+Tus notas nunca se borran solas. Para quitar los componentes del asistente IA en Mac/Linux: `bash uninstall.sh`. Obsidian, Zotero y Typst se desinstalan como cualquier aplicación.
