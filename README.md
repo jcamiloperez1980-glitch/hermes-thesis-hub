@@ -77,6 +77,6 @@ Tus notas nunca se borran solas. Para quitar los componentes del asistente IA en
 
 ## Licencia
 
-Licencia de uso personal: puedes usar y modificar el kit para tu propia tesis, y **todo lo que escribas con él es tuyo**. No puedes compartir ni revender los archivos del kit. Detalles en [LICENCIA.md](LICENCIA.md).
+Licencia de uso personal: puedes usar y modificar el kit para tu propia tesis, y **todo lo que escribas con él es tuyo**. No puedes compartir ni revender los archivos del kit. Detalles en [LICENCIA.md](LICENCIA.md). Reembolsos: [REEMBOLSOS.md](REEMBOLSOS.md).
 
 Obsidian, Zotero, Typst, Hermes y los skills de terceros tienen sus propias licencias.

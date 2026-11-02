@@ -122,7 +122,7 @@ Nada en esta licencia limita los derechos que te reconozcan las normas de protec
 
 ## 14. Reembolsos
 
-[POLÍTICA DE REEMBOLSO: por ejemplo, plazo en días desde la compra y condiciones. Debe ser coherente con la normativa de protección al consumidor del país de venta.]
+Los reembolsos se rigen por la [Política de reembolso](REEMBOLSOS.md). Si recibes un reembolso, esta licencia termina y debes eliminar el kit, pero conservas todo tu contenido.
 
 ## 15. Ley aplicable
 
