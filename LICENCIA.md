@@ -88,7 +88,7 @@ El contenido de la carpeta `demo/` (estudiante, universidad, autores, artículos
 
 ## 8. Licencias profesionales e institucionales
 
-Asesores, consultores, programas de posgrado, universidades y grupos de investigación que quieran usar el kit con varias personas o como parte de un servicio deben contactar al Titular en **[CORREO O ENLACE DE CONTACTO]** para obtener una licencia adecuada.
+Asesores, consultores, programas de posgrado, universidades y grupos de investigación que quieran usar el kit con varias personas o como parte de un servicio deben contactar al Titular en **jcamilope@researchailab.com** para obtener una licencia adecuada.
 
 ## 9. Actualizaciones
 
@@ -131,4 +131,4 @@ Esta licencia se rige por las leyes de **[PAÍS]**. Cualquier controversia se in
 ## 16. Contacto
 
 **[NOMBRE O RAZÓN SOCIAL]** · Research AI Lab
-[CORREO DE CONTACTO] · [SITIO WEB]
+jcamilope@researchailab.com · researchailab.com
