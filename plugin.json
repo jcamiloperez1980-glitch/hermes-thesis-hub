@@ -1,22 +1,22 @@
 {
-  "name": "hermes-thesis-hub",
-  "version": "1.0.0",
-  "description": "🎓 Ecosistema completo de investigación para tu tesis doctoral: skills, herramientas, plantillas y más.",
+  "name": "kit-tesis-doctoral",
+  "version": "2.0.0",
+  "description": "🎓 Kit de tesis doctoral: buscar literatura → leer y anotar → organizar en Obsidian → escribir en Typst (APA 7) → presentar.",
   "author": {
     "name": "Research AI Lab"
   },
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENCIA.md",
   "homepage": "https://github.com/jcamiloperez1980-glitch/hermes-thesis-hub",
   "keywords": [
     "hermes",
-    "thesis",
+    "tesis",
+    "doctorado",
     "academic",
-    "research",
-    "ponytail",
-    "typst",
-    "apa",
+    "openalex",
+    "zotero",
     "obsidian",
-    "zotero"
+    "typst",
+    "apa"
   ],
   "skills": [
     "skills"

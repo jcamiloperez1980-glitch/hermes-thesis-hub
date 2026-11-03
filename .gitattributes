@@ -1,1 +1,6 @@
 *.sh text eol=lf
+*.command text eol=lf
+*.ps1 text eol=crlf
+*.bat -text
+*.pptx binary
+*.pdf binary

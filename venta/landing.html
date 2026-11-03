@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kit de tesis doctoral · Research AI Lab</title>
+<meta name="description" content="Un sistema completo para llevar tu tesis doctoral de la primera búsqueda bibliográfica a la defensa: Zotero, Obsidian, Typst con APA 7 y plantillas listas.">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --surface: #ffffff;
+    --surface-2: #f2eee6;
+    --ink: #1c2333;
+    --ink-2: #4a5263;
+    --line: #e2ddd2;
+    --accent: #b5651d;
+    --accent-ink: #ffffff;
+    --accent-soft: #f6e8d9;
+    --navy: #1f2a44;
+    --ok: #2f7a4f;
+    --no: #a33b3b;
+    --radius: 14px;
+    --max: 1080px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12151c;
+      --surface: #1a1f29;
+      --surface-2: #222836;
+      --ink: #eef0f4;
+      --ink-2: #b2b8c4;
+      --line: #2e3545;
+      --accent: #e0914a;
+      --accent-ink: #1a1208;
+      --accent-soft: #3a2a1b;
+      --navy: #0c1018;
+      --ok: #6cc391;
+      --no: #e48585;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.2; margin: 0 0 .5em; letter-spacing: -0.01em; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
+  h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); }
+  h3 { font-size: 1.15rem; }
+  p { margin: 0 0 1em; }
+  a { color: var(--accent); }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+  section { padding: 72px 0; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .78rem; font-weight: 700; color: var(--accent); margin-bottom: .8em; }
+  .lead { font-size: 1.15rem; color: var(--ink-2); max-width: 46rem; }
+  .btn {
+    display: inline-block; background: var(--accent); color: var(--accent-ink); text-decoration: none;
+    font-weight: 700; padding: 14px 26px; border-radius: 999px; transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,.15); }
+  .btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+
+  /* Header */
+  header { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+  .brand { font-weight: 800; text-decoration: none; color: var(--ink); white-space: nowrap; }
+  .brand span { color: var(--accent); }
+  nav a { color: var(--ink-2); text-decoration: none; margin-left: 20px; font-size: .95rem; }
+  nav a:hover { color: var(--ink); }
+  @media (max-width: 760px) { nav .opt { display: none; } }
+
+  /* Hero */
+  .hero { padding: 88px 0 72px; }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .hero small { display: block; margin-top: 14px; color: var(--ink-2); }
+
+  /* Problema */
+  .pains { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-top: 28px; }
+  .pain { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+  .pain p { margin: 0; color: var(--ink-2); }
+  .pain strong { display: block; color: var(--ink); margin-bottom: 6px; }
+
+  /* Flujo */
+  .alt { background: var(--surface-2); }
+  .flow { list-style: none; padding: 0; margin: 32px 0 0; display: grid; gap: 14px; counter-reset: paso; }
+  .flow li {
+    counter-increment: paso; display: grid; grid-template-columns: 52px 1fr; gap: 16px; align-items: start;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px;
+  }
+  .flow li::before {
+    content: counter(paso); width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--navy); color: #fff; font-weight: 800; font-size: 1.1rem;
+  }
+  .flow h3 { margin-bottom: .25em; }
+  .flow p { margin: 0; color: var(--ink-2); }
+  .tool { display: inline-block; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: .78rem; font-weight: 700; background: var(--accent-soft); color: var(--accent); padding: 2px 10px; border-radius: 999px; margin-left: 6px; vertical-align: middle; }
+
+  .includes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px 28px; margin-top: 36px; padding: 0; list-style: none; }
+  .includes li { padding-left: 30px; position: relative; }
+  .includes li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--ok); font-weight: 900; }
+
+  /* Para quién */
+  .fit { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 28px; }
+  .fit > div { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+  .fit ul { margin: 0; padding-left: 1.2em; }
+  .fit li { margin-bottom: .5em; color: var(--ink-2); }
+  .fit .yes h3 { color: var(--ok); }
+  .fit .no h3 { color: var(--no); }
+
+  /* Precio */
+  .price-card {
+    max-width: 560px; margin: 32px auto 0; background: var(--surface); border: 2px solid var(--accent);
+    border-radius: 20px; padding: 36px 28px; text-align: center;
+  }
+  .price-slot {
+    border: 2px dashed var(--accent); border-radius: 12px; padding: 18px; margin: 18px 0 22px;
+    color: var(--accent); font-weight: 800; font-size: 1.4rem; background: var(--accent-soft);
+  }
+  .price-card ul { text-align: left; margin: 0 0 24px; padding-left: 1.2em; color: var(--ink-2); }
+
+  /* FAQ */
+  .faq { margin-top: 28px; display: grid; gap: 10px; }
+  details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 0 20px; }
+  summary { cursor: pointer; list-style: none; padding: 18px 28px 18px 0; font-weight: 700; position: relative; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; position: absolute; right: 0; top: 14px; font-size: 1.4rem; color: var(--accent); transition: transform .2s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { color: var(--ink-2); padding-bottom: 6px; }
+
+  /* Contacto */
+  .contact { background: var(--navy); color: #eef0f4; text-align: center; }
+  .contact .lead { color: #c3c9d6; margin: 0 auto 26px; }
+  .placeholder-note { margin-top: 18px; font-size: .9rem; color: #c3c9d6; border: 1px dashed #5a6480; display: inline-block; padding: 8px 14px; border-radius: 8px; }
+
+  footer { padding: 28px 0; color: var(--ink-2); font-size: .9rem; text-align: center; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#">Kit de tesis <span>doctoral</span></a>
+    <nav>
+      <a class="opt" href="#incluye">Qué incluye</a>
+      <a class="opt" href="#para-quien">Para quién</a>
+      <a class="opt" href="#preguntas">Preguntas</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Para doctorandos y maestrandos de Latinoamérica</div>
+      <h1>Tu tesis, organizada de la primera búsqueda a la defensa.</h1>
+      <p class="lead">Un sistema de trabajo probado con herramientas gratuitas, plantillas listas y guías paso a paso. Deja de perder fuentes, notas y semanas peleando con las normas APA.</p>
+      <div class="ctas">
+        <a class="btn" href="#contacto">Quiero el kit</a>
+        <a class="btn ghost" href="#incluye">Ver qué incluye</a>
+      </div>
+      <small>Creado por Research AI Lab a partir de años de asesoría de tesis doctorales y de maestría.</small>
+    </div>
+  </section>
+
+  <!-- PROBLEMA -->
+  <section class="alt" id="problema">
+    <div class="wrap">
+      <div class="eyebrow">El problema</div>
+      <h2>Hacer un doctorado ya es difícil. Desorganizarlo lo hace más largo.</h2>
+      <p class="lead">La mayoría de los doctorandos no se atrasan por falta de capacidad, sino porque nadie les enseñó un sistema para manejar cientos de fuentes, ideas y borradores durante años.</p>
+      <div class="pains">
+        <div class="pain"><strong>PDFs por todas partes</strong><p>En Descargas, en el correo, en tres carpetas distintas. Y no recuerdas cuál decía qué.</p></div>
+        <div class="pain"><strong>Lees, pero no lo encuentras después</strong><p>Subrayaste la idea perfecta hace dos meses. Hoy, que la necesitas, no aparece.</p></div>
+        <div class="pain"><strong>Días perdidos en el formato</strong><p>Referencias APA a mano, índices que se desordenan, tablas que se mueven al pegar.</p></div>
+        <div class="pain"><strong>"¿Qué avanzaste?"</strong><p>Llega la reunión con tu director(a) y no tienes un registro claro de tu progreso.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUÉ INCLUYE -->
+  <section id="incluye">
+    <div class="wrap">
+      <div class="eyebrow">Qué incluye</div>
+      <h2>Un flujo de cinco pasos, con todo listo para usar</h2>
+      <p class="lead">Cada paso tiene su guía en español, sus plantillas y la herramienta adecuada ya configurada.</p>
+
+      <ol class="flow">
+        <li><div><h3>Buscar literatura <span class="tool">OpenAlex · Redalyc · SciELO</span></h3><p>Plantilla de plan de búsqueda (la que tu tribunal te pedirá justificar) y estrategias para buscar en español e inglés, con DOI verificable.</p></div></li>
+        <li><div><h3>Leer y anotar <span class="tool">Zotero</span></h3><p>Guarda cada fuente con un clic, subraya con un código de colores y ten tus referencias APA listas para citar.</p></div></li>
+        <li><div><h3>Organizar <span class="tool">Obsidian</span></h3><p>Un vault con carpetas para cada etapa: fichas de lectura, conceptos, matriz de literatura, notas diarias y registro de asesorías, todo enlazado.</p></div></li>
+        <li><div><h3>Escribir <span class="tool">Typst · APA 7</span></h3><p>Plantilla de tesis con portada, resumen, índice y referencias que se generan solas desde Zotero. También funciona en el navegador, sin instalar nada.</p></div></li>
+        <li><div><h3>Presentar <span class="tool">PowerPoint · Keynote · Slides</span></h3><p>Plantilla de defensa de 13 diapositivas con notas sobre qué decir y cuánto tiempo dedicar, más una guía para preparar las preguntas del tribunal.</p></div></li>
+      </ol>
+
+      <ul class="includes">
+        <li>Instalador con doble clic para Windows y Mac</li>
+        <li>6 plantillas de Obsidian listas para usar</li>
+        <li>Plantilla de tesis APA 7 en Typst</li>
+        <li>Plantilla de defensa con notas del orador</li>
+        <li>Guía rápida: tus primeros 30 minutos</li>
+        <li>Vault de demostración con una tesis de ejemplo</li>
+        <li>Guía de uso ético de IA en la tesis</li>
+        <li>Asistente IA opcional para buscar literatura y preparar presentaciones</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PARA QUIÉN -->
+  <section class="alt" id="para-quien">
+    <div class="wrap">
+      <div class="eyebrow">Para quién es</div>
+      <h2>Hecho para ti si…</h2>
+      <div class="fit">
+        <div class="yes">
+          <h3>Es para ti si</h3>
+          <ul>
+            <li>Estás en un doctorado o maestría de investigación, en cualquier etapa.</li>
+            <li>Sientes que tu literatura y tus notas se te están saliendo de control.</li>
+            <li>Quieres un sistema que dure toda la tesis, no un truco de una semana.</li>
+            <li>No eres experto(a) en tecnología, pero puedes seguir instrucciones paso a paso.</li>
+            <li>Quieres usar IA con criterio, sin poner en riesgo tu integridad académica.</li>
+          </ul>
+        </div>
+        <div class="no">
+          <h3>No es para ti si</h3>
+          <ul>
+            <li>Buscas que alguien (o una IA) escriba la tesis por ti.</li>
+            <li>Ya tienes un sistema con Zotero, Obsidian y LaTeX/Typst que te funciona.</li>
+            <li>Tu programa exige un formato muy específico que no sea APA y no quieres adaptarlo.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRECIO -->
+  <section id="precio">
+    <div class="wrap">
+      <div class="eyebrow" style="text-align:center">Precio</div>
+      <h2 style="text-align:center">Todo el kit, en un solo pago</h2>
+      <div class="price-card">
+        <!-- PRECIO: pendiente de definir por Research AI Lab. Reemplazar el bloque .price-slot -->
+        <div class="price-slot" aria-label="Precio pendiente de definir">[ PRECIO POR DEFINIR ]</div>
+        <ul>
+          <li>Instaladores, plantillas y guías completas</li>
+          <li>Vault de demostración</li>
+          <li>Actualizaciones del kit <!-- CONDICIONES: definir alcance y duración --></li>
+        </ul>
+        <a class="btn" href="#contacto">Quiero el kit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="alt" id="preguntas">
+    <div class="wrap">
+      <div class="eyebrow">Preguntas frecuentes</div>
+      <h2>Lo que suelen preguntarnos</h2>
+      <div class="faq">
+        <details>
+          <summary>¿Necesito saber programar?</summary>
+          <p>No. El instalador se ejecuta con doble clic y cada paso tiene una guía que te dice exactamente qué verás en pantalla y qué hacer. Si sabes instalar un programa y copiar una carpeta, puedes usar el kit.</p>
+        </details>
+        <details>
+          <summary>¿Funciona en Windows y en Mac?</summary>
+          <p>Sí. Hay un instalador y una guía para cada sistema (Windows 10/11 y macOS). También funciona en Linux para quienes lo prefieran.</p>
+        </details>
+        <details>
+          <summary>¿Tengo que pagar por Obsidian, Zotero o Typst?</summary>
+          <p>No. Las tres herramientas son gratuitas para uso personal. Zotero ofrece almacenamiento extra en la nube con costo, pero el plan gratuito alcanza para empezar. Typst tiene una versión web gratuita.</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa con la IA? ¿Escribe la tesis por mí?</summary>
+          <p>No, y no debería. El asistente IA es opcional y está pensado para buscar literatura con DOI verificable, organizar tus notas, darte retroalimentación de estilo y preparar tu defensa. El kit incluye una guía de uso ético para que lo uses de acuerdo con las reglas de tu programa.</p>
+        </details>
+        <details>
+          <summary>¿El asistente IA tiene costo adicional?</summary>
+          <p>Sí. Usa modelos de IA a través de OpenRouter, que cobra por uso directamente a ti. Todo el resto del kit funciona sin el asistente.</p>
+        </details>
+        <details>
+          <summary>Mi universidad exige Word. ¿Me sirve?</summary>
+          <p>Sí. Los pasos de búsqueda, lectura y organización no dependen del procesador de texto, y Zotero se integra con Word para las citas. La plantilla en Typst es una recomendación, no una obligación.</p>
+        </details>
+        <details>
+          <summary>¿Mis notas quedan en la nube de alguien más?</summary>
+          <p>No. Obsidian guarda tus notas como archivos de texto en tu propio computador. Tú decides si las respaldas y dónde.</p>
+        </details>
+        <details>
+          <summary>Ya empecé mi tesis hace tiempo. ¿Llego tarde?</summary>
+          <p>No. Puedes importar a Zotero lo que ya tienes y crear fichas solo para las fuentes clave. Muchos doctorandos adoptan un sistema a mitad de camino, cuando el desorden empieza a costarles tiempo.</p>
+        </details>
+        <details>
+          <summary>¿Y si el kit no me sirve?</summary>
+          <p>Tienes [14] días desde la compra para pedir el reembolso completo, sin explicaciones. Si no logras instalarlo, primero te ayudamos, y si no se resuelve te devolvemos el dinero hasta [30] días después de la compra. Tus notas y tu tesis siguen siendo tuyas. <!-- REEMBOLSO: actualizar plazos según REEMBOLSOS.md --></p>
+        </details>
+        <details>
+          <summary>¿Puedo compartirlo con mis compañeros?</summary>
+          <p>La licencia es personal: puedes instalar el kit en todos tus equipos y modificarlo, pero no compartir los archivos. Lo que escribas con el kit (tus notas y tu tesis) es completamente tuyo y puedes compartirlo como quieras. Para grupos, asesores o programas de posgrado hay licencias profesionales e institucionales: escríbenos.</p>
+        </details>
+        <details>
+          <summary>¿Sirve para maestría?</summary>
+          <p>Sí. El flujo es el mismo para cualquier tesis de investigación; simplemente usarás menos fuentes.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contact" id="contacto">
+    <div class="wrap">
+      <h2>¿Listo(a) para ordenar tu tesis?</h2>
+      <p class="lead">Escríbenos y te contamos cómo obtener el kit.</p>
+      <!-- CONTACTO: reemplazar href="#contacto" por el enlace real (formulario, WhatsApp o correo) -->
+      <a class="btn" href="#contacto">Contactar</a>
+      <div class="placeholder-note">Espacio reservado: formulario o enlace de contacto por definir</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">Kit de tesis doctoral · Research AI Lab</div>
+</footer>
+
+</body>
+</html>
