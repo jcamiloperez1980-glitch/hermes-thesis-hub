@@ -20,7 +20,7 @@ Si en los **[14] días calendario** siguientes a la compra decides que el kit no
 
 Si el kit no funciona en tu equipo:
 
-1. Escríbenos a **[CORREO DE SOPORTE]** describiendo el problema. Te ayudaremos con la instalación o te indicaremos una alternativa (por ejemplo, la versión web de Typst o la instalación manual).
+1. Escríbenos a **jcamilope@researchailab.com** describiendo el problema. Te ayudaremos con la instalación o te indicaremos una alternativa (por ejemplo, la versión web de Typst o la instalación manual).
 2. Si en **[5] días hábiles** desde tu primer mensaje no logramos que funcione, te devolvemos el 100 %, siempre que lo pidas dentro de los **[30] días** siguientes a la compra.
 
 Para ayudarte necesitamos saber tu sistema operativo y su versión, y lo que viste en pantalla. Una captura nos sirve mucho.
@@ -37,7 +37,7 @@ Fuera de lo que la ley de tu país te garantice (sección 7), no hay reembolso e
 
 ## 4. Cómo pedir el reembolso
 
-1. Escribe a **[CORREO DE SOPORTE]** con el asunto **"Reembolso"**.
+1. Escribe a **jcamilope@researchailab.com** con el asunto **"Reembolso"**.
 2. Incluye el correo con el que compraste y el número de pedido o comprobante de pago.
 3. Te confirmaremos la recepción en un máximo de **[3] días hábiles**.
 
@@ -72,4 +72,4 @@ Podemos actualizar esta política. Se aplica la versión vigente en la fecha en 
 ## Contacto
 
 **[NOMBRE O RAZÓN SOCIAL]** · Research AI Lab
-[CORREO DE SOPORTE] · [SITIO WEB]
+jcamilope@researchailab.com · researchailab.com
